@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: XmoeVideo-Service
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://81.71.156.13:29669/maccms?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    username: maccms
+    password: KWHLFTaxtrFXj7Ks
+server:
+  port: 8000
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true #开启驼峰命名
+  mapper-locations: mapper/*.xml # 指定mapper.xml位置
