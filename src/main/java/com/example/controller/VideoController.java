@@ -19,6 +19,7 @@ public class VideoController {
 
     @GetMapping("/videoInfo")
     public List<Map<String, Object>> getVideoInfo() {
-        return null;
+        List<Map<String, Object>> videoInfo = videoService.getVideoInfo();
+        return videoInfo;
     }
 }

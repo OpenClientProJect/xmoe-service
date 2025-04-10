@@ -8,6 +8,6 @@
         select vod_id, vod_pic, vod_name, vod_blurb, vod_remarks,vod_actor,vod_play_url
         from mac_vod
         order by rand()
-        limit 5
+        limit 20
     </select>
 </mapper>

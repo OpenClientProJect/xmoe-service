@@ -20,10 +20,16 @@ public class TestGetVideo {
 
     @Test
     public void testGetVideo() {
-
         List<Map<String, Object>> videoInfo = videoMapper.getVideoInfo();
         System.out.println(videoInfo);
     }
-    
+
+    @Test
+    public void testGetVideoService() {
+        for (int i = 0; i < 10; i++) {
+            List<Map<String, Object>> videoInfo = videoService.getVideoInfo();
+            System.out.println(videoInfo);
+        }
+    }
 
 }
