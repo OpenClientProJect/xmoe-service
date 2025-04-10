@@ -65,7 +65,7 @@ public class VideoServiceImpl implements VideoService {
                 // 提取剧集标题和加密URL
                 int separatorIndex = episode.indexOf("$");
                 if (separatorIndex > -1) {
-                    String title = episode.substring(0, separatorIndex + 1); // 包含分隔符 $
+                    String title = episode.substring(0, separatorIndex); // 不包含分隔符 $
                     String encryptedUrl = episode.substring(separatorIndex + 1);
                     
                     // 去除前缀
