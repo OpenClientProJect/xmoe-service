@@ -46,10 +46,10 @@ public class VideoServiceImpl implements VideoService {
         // 分割多个播放源，以 $$$ 为分隔符
         String[] playSources = vodPlayUrl.split("\\$\\$\\$");
         StringBuilder decryptedUrl = new StringBuilder();
-        
+        // 遍历每个播放源
         for (int i = 0; i < playSources.length; i++) {
             if (i > 0) {
-                decryptedUrl.append("$$$");
+                decryptedUrl.append(",");  // 将原来的 $$$ 替换为逗号
             }
             
             // 分割同一播放源中的多个剧集链接，以 # 为分隔符
@@ -67,7 +67,7 @@ public class VideoServiceImpl implements VideoService {
                 if (separatorIndex > -1) {
                     String title = episode.substring(0, separatorIndex); // 不包含分隔符 $
                     String encryptedUrl = episode.substring(separatorIndex + 1);
-                    
+
                     // 去除前缀
                     if (encryptedUrl.startsWith("MOE")) {
                         encryptedUrl = encryptedUrl.substring(3);
@@ -76,7 +76,7 @@ public class VideoServiceImpl implements VideoService {
                     } else if (encryptedUrl.startsWith("id_XS")) {
                         encryptedUrl = encryptedUrl.substring(5);
                     }
-                    
+
                     // 解密URL
                     String decrypted = RC4DUtil.parseRC4D(encryptedUrl);
                     decryptedSource.append(title).append(decrypted);
