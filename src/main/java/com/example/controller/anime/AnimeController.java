@@ -1,6 +1,5 @@
 package com.example.controller.anime;
 
-import com.example.service.VideoService;
 import com.example.service.anime.AnimeService;
 import com.example.utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;

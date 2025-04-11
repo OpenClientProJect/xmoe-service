@@ -1,39 +1,47 @@
-package com.example.service.impl;
+package com.example.service.drama.impl;
 
-import com.example.mapper.VideoMapper;
-import com.example.service.VideoService;
+import com.example.mapper.DramaMapper;
+import com.example.pojo.Drama;
+import com.example.service.drama.DramaService;
 import com.example.utils.RC4DUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 @Service
-public class VideoServiceImpl implements VideoService {
+public class DramaServiceImpl implements DramaService {
 
     @Autowired
-    private VideoMapper videoMapper;
+    private DramaMapper dramaMapper;
 
+    /**
+     * 获取番剧详情
+     */
     @Override
-    public List<Map<String, Object>> getVideoInfo() {
-        List<Map<String, Object>> videoInfo = videoMapper.getVideoInfo();
+    public Map<String, Object> getParseDramaInfo(Integer vodId) {
+        Map<String, Object> videoInfo = dramaMapper.DramaInfo(vodId);
         
         // 处理并解密 vod_play_url 字段
-        for (Map<String, Object> video : videoInfo) {
-            if (video.containsKey("vod_play_url") && video.get("vod_play_url") != null) {
-                String vodPlayUrl = video.get("vod_play_url").toString();
+            if (videoInfo.containsKey("vod_play_url") && videoInfo.get("vod_play_url") != null) {
+                String vodPlayUrl = videoInfo.get("vod_play_url").toString();
                 String decryptedUrl = decryptVodPlayUrl(vodPlayUrl);
-                video.put("vod_play_url", decryptedUrl);
+                videoInfo.put("vod_play_url", decryptedUrl);
             }
-        }
-        
+
         return videoInfo;
     }
-    
+
+
+    /**
+     * 获取番剧集合
+     */
+    @Override
+    public List<Drama> getDramaList() {
+        return dramaMapper.getDramaList();
+    }
+
     /**
      * 解密 vod_play_url 字段
      * 需要将数据开头的"第XX集$id_MOE、$MOE、$id_XS"和结尾的"#"去掉后调用RC4DUtil.parseRC4D方法解密

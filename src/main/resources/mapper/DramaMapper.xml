@@ -2,12 +2,16 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.example.mapper.VideoMapper">
+<mapper namespace="com.example.mapper.DramaMapper">
 
-    <select id="getVideoInfo" resultType="java.util.Map">
+    <select id="DramaInfo" resultType="Map">
         select vod_id, vod_pic, vod_name, vod_blurb, vod_remarks,vod_actor,vod_play_url
         from mac_vod
-        order by rand()
-        limit 20
+        where vod_id = #{vodId}
+    </select>
+
+    <select id="getDramaList" resultType="com.example.pojo.Drama">
+            select vod_id,vod_pic,vod_remarks,vod_name
+            from mac_vod
     </select>
 </mapper>
